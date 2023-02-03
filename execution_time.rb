@@ -11,6 +11,7 @@ def my_min_slow(array)
   end
   min
 end
+
 # O(n^2)
 
 def my_min_fast(array)
@@ -22,25 +23,27 @@ def my_min_fast(array)
   end
   min
 end
+
 # O(n)
 
 def largest_contiguous_subsum_slow(array)
-    subarrays = []
-    max = array[0]
-    (0...array.length).each do |i|
-        subarrays << [array[i]]
-        (i+1...array.length).each do |e|
-            subarrays << array[i..e]
-        end
+  subarrays = []
+  max = array[0]
+  (0...array.length).each do |i|
+    subarrays << [array[i]]
+    (i + 1...array.length).each do |e|
+      subarrays << array[i..e]
     end
-    subarrays.each do |arrays|
-        # print arrays
-        if arrays.sum > max
-            max = arrays.sum
-        end
+  end
+  subarrays.each do |arrays|
+    # print arrays
+    if arrays.sum > max
+      max = arrays.sum
     end
-    max
+  end
+  max
 end
+
 # O(n^2)
 # list = [5, 3, -7]
 # puts largest_contiguous_subsum_slow(list)
@@ -51,17 +54,30 @@ def largest_contiguous_subsum_fast(array)
   current_sum = 0
 
   array.each do |ele|
-    current_sum += ele
-    if current_sum - min > max
-      max = current_sum - min
-    end
-    if current_sum < min
-      min = current_sum
-    end
+      current_sum += ele
+      if current_sum < 0
+        if current_sum > max
+          max = current_sum
+        end
+        current_sum = 0
+      elsif current_sum > max
+        max = current_sum
+      end
+    #   current_sum = 0
+    # else
+    #   current_sum += ele
+    #   if current_sum > max
+    #     max = current_sum
+    #   end
+
+    # if current_sum < min
+    #   min = current_sum
+    # end
   end
   max
 end
+
 # O(n)
 
-# list = [-5, -1, -3]
-# puts largest_contiguous_subsum_fast(list)
+list = [-5, -1, -3]
+puts largest_contiguous_subsum_fast(list)
