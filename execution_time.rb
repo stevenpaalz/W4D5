@@ -41,6 +41,27 @@ def largest_contiguous_subsum_slow(array)
     end
     max
 end
+# O(n^2)
+# list = [5, 3, -7]
+# puts largest_contiguous_subsum_slow(list)
 
-list = [5, 3, -7]
-puts largest_contiguous_subsum_slow(list)
+def largest_contiguous_subsum_fast(array)
+  min = 0
+  max = array[0]
+  current_sum = 0
+
+  array.each do |ele|
+    current_sum += ele
+    if current_sum - min > max
+      max = current_sum - min
+    end
+    if current_sum < min
+      min = current_sum
+    end
+  end
+  max
+end
+# O(n)
+
+# list = [-5, -1, -3]
+# puts largest_contiguous_subsum_fast(list)
