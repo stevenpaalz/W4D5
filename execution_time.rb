@@ -24,4 +24,23 @@ def my_min_fast(array)
 end
 # O(n)
 
+def largest_contiguous_subsum_slow(array)
+    subarrays = []
+    max = array[0]
+    (0...array.length).each do |i|
+        subarrays << [array[i]]
+        (i+1...array.length).each do |e|
+            subarrays << array[i..e]
+        end
+    end
+    subarrays.each do |arrays|
+        # print arrays
+        if arrays.sum > max
+            max = arrays.sum
+        end
+    end
+    max
+end
 
+list = [5, 3, -7]
+puts largest_contiguous_subsum_slow(list)
